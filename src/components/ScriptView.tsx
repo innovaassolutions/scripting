@@ -3,24 +3,31 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Markdown from "react-markdown";
 import ShotListGrid from "./ShotListGrid";
 import type { Script } from "@/lib/types";
 
+function Prose({ children }: { children: string }) {
+  return (
+    <div className="prose-script">
+      <Markdown>{children}</Markdown>
+    </div>
+  );
+}
+
 function ViewSection({
   label,
-  children,
+  content,
 }: {
   label: string;
-  children: React.ReactNode;
+  content: string;
 }) {
   return (
     <section className="py-5">
       <p className="text-[11px] font-medium text-charcoal/30 uppercase tracking-widest mb-2">
         {label}
       </p>
-      <div className="text-lg sm:text-xl leading-relaxed text-charcoal whitespace-pre-wrap">
-        {children}
-      </div>
+      <Prose>{content}</Prose>
     </section>
   );
 }
@@ -109,19 +116,17 @@ export default function ScriptView({ script }: { script: Script }) {
 
         {/* Opening Hook */}
         {script.opening_hook?.trim() && (
-          <ViewSection label="Opening Hook">
-            {script.opening_hook}
-          </ViewSection>
+          <ViewSection label="Opening Hook" content={script.opening_hook} />
         )}
 
         {/* Credibility Points */}
         {script.credibility_points?.trim() && (
-          <ViewSection label="Credibility">{script.credibility_points}</ViewSection>
+          <ViewSection label="Credibility" content={script.credibility_points} />
         )}
 
         {/* Story or Quote */}
         {script.story_or_quote?.trim() && (
-          <ViewSection label="Story / Quote">{script.story_or_quote}</ViewSection>
+          <ViewSection label="Story / Quote" content={script.story_or_quote} />
         )}
 
         {/* Key Points + Details */}
@@ -137,9 +142,9 @@ export default function ScriptView({ script }: { script: Script }) {
                     {i + 1}. {kp.point}
                   </h3>
                   {kp.details?.trim() && (
-                    <p className="text-base sm:text-lg leading-relaxed text-charcoal/80 whitespace-pre-wrap pl-5">
-                      {kp.details}
-                    </p>
+                    <div className="pl-5">
+                      <Prose>{kp.details}</Prose>
+                    </div>
                   )}
                 </div>
               ))}
@@ -149,19 +154,17 @@ export default function ScriptView({ script }: { script: Script }) {
 
         {/* Helpful Ending */}
         {script.helpful_ending?.trim() && (
-          <ViewSection label="Ending">{script.helpful_ending}</ViewSection>
+          <ViewSection label="Ending" content={script.helpful_ending} />
         )}
 
         {/* Revenue CTA */}
         {script.revenue_cta?.trim() && (
-          <ViewSection label="CTA">{script.revenue_cta}</ViewSection>
+          <ViewSection label="CTA" content={script.revenue_cta} />
         )}
 
         {/* CTA Placement */}
         {script.revenue_cta_placement?.trim() && (
-          <ViewSection label="CTA Placement">
-            {script.revenue_cta_placement}
-          </ViewSection>
+          <ViewSection label="CTA Placement" content={script.revenue_cta_placement} />
         )}
 
         {/* Shot List */}
