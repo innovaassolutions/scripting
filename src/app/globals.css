@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5EDE8;
+  --color-blush: #F0E4DD;
+  --color-charcoal: #2D2D2D;
+  --color-warm-brown: #8B6914;
+  --color-dark-brown: #5C4033;
+  --color-muted-blue: #4A6FA5;
+  --color-muted-red: #C44536;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+  }
+}
